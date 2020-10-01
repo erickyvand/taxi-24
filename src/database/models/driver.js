@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 			lastName: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
       location: DataTypes.STRING,
-      position: DataTypes.STRING,
+      position: DataTypes.INTEGER,
 			isAvailable: DataTypes.BOOLEAN,
 		},
 		{

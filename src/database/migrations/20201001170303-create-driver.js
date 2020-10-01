@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       position: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       isAvailable: {
         type: Sequelize.BOOLEAN,

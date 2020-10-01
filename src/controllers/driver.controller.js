@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { paginationHelper } from '../helpers';
 import DriverService from '../services/driver.service';
 import ResponseService from '../services/response.service';
@@ -24,7 +25,7 @@ class DriverController {
 		const { page = 1, limit = 10 } = req.query;
 		const offset = (page - 1) * limit;
 
-		const drivers = await DriverService.getDrivers(
+		const drivers = await DriverService.availableDrivers(
 			{ isAvailable: true },
 			{ offset, limit }
 		);
@@ -37,6 +38,34 @@ class DriverController {
 			}),
 			rows: drivers.rows,
 		});
+		return ResponseService.send(res);
+	}
+
+	static async getDriversSpecificLocation(req, res) {
+		const { page = 1, limit = 10 } = req.query;
+		const offset = (page - 1) * limit;
+
+		const drivers = await DriverService.availableDrivers(
+			{
+				isAvailable: true,
+				location: req.params.location,
+				position: { [Op.lte]: 3 },
+			},
+			{ offset, limit }
+		);
+		ResponseService.setSuccess(
+			200,
+			'List of Available Drivers within 3km for a specific location',
+			{
+				pageMeta: paginationHelper({
+					count: drivers.count,
+					rows: drivers.rows,
+					offset,
+					limit,
+				}),
+				rows: drivers.rows,
+			}
+		);
 		return ResponseService.send(res);
 	}
 }
