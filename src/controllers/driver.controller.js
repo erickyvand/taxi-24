@@ -19,6 +19,26 @@ class DriverController {
 		});
 		return ResponseService.send(res);
 	}
+
+	static async getAvailableDrivers(req, res) {
+		const { page = 1, limit = 10 } = req.query;
+		const offset = (page - 1) * limit;
+
+		const drivers = await DriverService.getDrivers(
+			{ isAvailable: true },
+			{ offset, limit }
+		);
+		ResponseService.setSuccess(200, 'List of Available Drivers', {
+			pageMeta: paginationHelper({
+				count: drivers.count,
+				rows: drivers.rows,
+				offset,
+				limit,
+			}),
+			rows: drivers.rows,
+		});
+		return ResponseService.send(res);
+	}
 }
 
 export default DriverController;
