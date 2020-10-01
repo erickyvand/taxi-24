@@ -1,0 +1,24 @@
+import { paginationHelper } from '../helpers';
+import DriverService from '../services/driver.service';
+import ResponseService from '../services/response.service';
+
+class DriverController {
+	static async getAllDrivers(req, res) {
+		const { page = 1, limit = 10 } = req.query;
+		const offset = (page - 1) * limit;
+
+		const drivers = await DriverService.getDrivers({ offset, limit });
+		ResponseService.setSuccess(200, 'List of All Drivers', {
+			pageMeta: paginationHelper({
+				count: drivers.count,
+				rows: drivers.rows,
+				offset,
+				limit,
+			}),
+			rows: drivers.rows,
+		});
+		return ResponseService.send(res);
+	}
+}
+
+export default DriverController;
