@@ -1,0 +1,19 @@
+{
+  "name": "taxi-24",
+  "version": "1.0.0",
+  "description": "TAXI 24",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erickyvand/taxi-24.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erickyvand/taxi-24/issues"
+  },
+  "homepage": "https://github.com/erickyvand/taxi-24#readme"
+}
