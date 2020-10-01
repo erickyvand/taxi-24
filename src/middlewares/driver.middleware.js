@@ -12,3 +12,13 @@ export async function checkLocationExists(req, res, next) {
 	}
 	next();
 }
+
+export async function checkDriverExists(req, res, next) {
+	const driver = await DriverService.getDriver({ id: req.params.driverId });
+
+	if (!driver) {
+		ResponseService.setError(404, 'Driver does not exist');
+		return ResponseService.send(res);
+	}
+	next();
+}

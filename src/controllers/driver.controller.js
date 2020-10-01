@@ -68,6 +68,13 @@ class DriverController {
 		);
 		return ResponseService.send(res);
 	}
+
+	static async specificDriver(req, res) {
+		const driver = await DriverService.getDriver({ id: req.params.driverId });
+
+		ResponseService.setSuccess(200, 'The Specific driver', driver);
+		return ResponseService.send(res);
+	}
 }
 
 export default DriverController;
