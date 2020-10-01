@@ -16,12 +16,19 @@ class DriverService {
 	/**
 	 * @returns {object} function to get available drivers
 	 */
-	static getDrivers(attribute, { limit, offset }) {
+	static availableDrivers(attribute, { limit, offset }) {
 		return Driver.findAndCountAll({
 			where: attribute,
 			limit,
 			offset,
 		});
+	}
+
+	/**
+	 * @returns {object} function to get specific driver
+	 */
+	static getDriver(attribute) {
+		return Driver.findOne({ where: attribute });
 	}
 }
 
