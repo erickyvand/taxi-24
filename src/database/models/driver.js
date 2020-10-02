@@ -13,16 +13,20 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: 'riderId',
 				targetKey: 'id',
 			});
+			Driver.belongsTo(models.Location, {
+				foreignKey: 'locationId',
+				targetKey: 'id',
+			});
 		}
 	}
 	Driver.init(
 		{
 			riderId: DataTypes.INTEGER,
+			locationId: DataTypes.INTEGER,
 			firstName: DataTypes.STRING,
 			lastName: DataTypes.STRING,
-			phoneNumber: DataTypes.STRING,
-			location: DataTypes.STRING,
 			position: DataTypes.INTEGER,
+			phoneNumber: DataTypes.STRING,
 			isAvailable: DataTypes.BOOLEAN,
 		},
 		{

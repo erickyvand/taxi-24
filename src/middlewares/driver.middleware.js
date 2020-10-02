@@ -1,9 +1,10 @@
 import DriverService from '../services/driver.service';
+import LocationService from '../services/location.service';
 import ResponseService from '../services/response.service';
 
 export async function checkLocationExists(req, res, next) {
-	const location = await DriverService.getDriver({
-		location: req.params.location,
+	const location = await LocationService.getLocation({
+		id: req.params.locationId,
 	});
 
 	if (!location) {

@@ -48,7 +48,7 @@ class DriverController {
 		const drivers = await DriverService.availableDrivers(
 			{
 				isAvailable: true,
-				location: req.params.location,
+				locationId: req.params.locationId,
 				position: { [Op.lte]: 3 },
 			},
 			{ offset, limit }
