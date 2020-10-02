@@ -32,6 +32,10 @@ export const validateTripBody = (req, res, next) => {
 				'date.format': 'Departure date must have format YYYY-MM-DD',
 				'any.required': 'Departure date is required',
 			}),
+		amount: Joi.number().required().messages({
+			'any.required': 'Amount is required',
+			'number.base': 'Amouont must be a number',
+		}),
 	}).options({ abortEarly: false });
 
 	const { error } = schema.validate(req.body);
@@ -61,4 +65,4 @@ export const validateTripUrlParam = (req, res, next) => {
 		return ResponseService.send(res);
 	}
 	next();
-}
+};
