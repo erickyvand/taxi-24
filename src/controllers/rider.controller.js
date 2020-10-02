@@ -8,19 +8,21 @@ class RiderController {
 		const offset = (page - 1) * limit;
 
 		const riders = await RiderService.findRiders({ offset, limit });
-		ResponseService.setSuccess(
-			200,
-			'List of all riders',
-			{
-				pageMeta: paginationHelper({
-					count: riders.count,
-					rows: riders.rows,
-					offset,
-					limit,
-				}),
+		ResponseService.setSuccess(200, 'List of all riders', {
+			pageMeta: paginationHelper({
+				count: riders.count,
 				rows: riders.rows,
-			}
-		);
+				offset,
+				limit,
+			}),
+			rows: riders.rows,
+		});
+		return ResponseService.send(res);
+	}
+
+	static async specificRider(req, res) {
+		const rider = await RiderService.getRider({ id: req.params.riderId });
+		ResponseService.setSuccess(200, 'Specific Rider', rider);
 		return ResponseService.send(res);
 	}
 }
