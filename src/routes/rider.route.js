@@ -12,5 +12,11 @@ router.get(
 	checkRiderExists,
 	RiderController.specificRider
 );
+router.get(
+	'/:riderId/drivers',
+	validateRiderUrlParam,
+	checkRiderExists,
+	RiderController.closeDrivers
+);
 
 export default router;

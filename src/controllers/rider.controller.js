@@ -1,4 +1,5 @@
 import { paginationHelper } from '../helpers';
+import DriverService from '../services/driver.service';
 import ResponseService from '../services/response.service';
 import RiderService from '../services/rider.service';
 
@@ -23,6 +24,14 @@ class RiderController {
 	static async specificRider(req, res) {
 		const rider = await RiderService.getRider({ id: req.params.riderId });
 		ResponseService.setSuccess(200, 'Specific Rider', rider);
+		return ResponseService.send(res);
+	}
+
+	static async closeDrivers(req, res) {
+		const drivers = await DriverService.findDrivers({
+			riderId: req.params.riderId,
+		});
+		ResponseService.setSuccess(200, 'Closest Driver for this Rider', drivers);
 		return ResponseService.send(res);
 	}
 }

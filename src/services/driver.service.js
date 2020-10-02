@@ -30,6 +30,14 @@ class DriverService {
 	static getDriver(attribute) {
 		return Driver.findOne({ where: attribute });
 	}
+
+	static findDrivers(attribute) {
+		return Driver.findAll({
+			where: attribute,
+			order: [['position']],
+			limit: 3,
+		});
+	}
 }
 
 export default DriverService;

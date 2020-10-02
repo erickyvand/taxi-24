@@ -5,10 +5,16 @@ import RiderService from '../services/rider.service';
 import TripService from '../services/trip.service';
 
 export async function checkDriverIdExists(req, res, next) {
-	const driver = await DriverService.getDriver({ id: req.body.driverId });
+	const driver = await DriverService.getDriver({
+		id: req.body.driverId,
+		riderId: req.body.riderId,
+	});
 
 	if (!driver) {
-		ResponseService.setError(404, 'Driver does not exist');
+		ResponseService.setError(
+			404,
+			'Driver does not exist or does not belong to this rider'
+		);
 		return ResponseService.send(res);
 	}
 	next();
