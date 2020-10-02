@@ -10,6 +10,13 @@ class TripService {
 	static findTrip(attribute) {
 		return Trip.findOne({ where: attribute });
 	}
+
+	static updateTrip(tripId, property) {
+		return Trip.update(property, {
+			where: tripId,
+			returning: true,
+		});
+	}
 }
 
 export default TripService;
