@@ -10,7 +10,7 @@
 		"seed:up": "npx sequelize-cli db:seed:all",
 		"seed:drop": "npx sequelize-cli db:seed:undo:all",
 		"pretest": "npm run migrate:drop && npm run migrate:up && npm run seed:up",
-		"coverage": "nyc report --report=text-lcov | coveralls",
+		"coverage": "nyc report --reporter=text-lcov | coveralls",
 		"test": "export NODE_ENV=test && nyc --reporter=html --reporter=text mocha --require @babel/register src/tests/**/*.test.js --timeout 100000 --exit"
 	},
 	"repository": {
