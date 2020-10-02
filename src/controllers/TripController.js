@@ -15,6 +15,19 @@ class TripController {
 		ResponseService.setSuccess(201, 'Trip request successfully created', trip);
 		return ResponseService.send(res);
 	}
+
+	static async completeTrip(req, res) {
+		const completeTrip = await TripService.updateTrip(
+			{ id: req.params.tripId },
+			{ status: 'complete' }
+		);
+		ResponseService.setSuccess(
+			200,
+			'Trip has been completed successfully',
+			completeTrip
+		);
+		return ResponseService.send(res);
+	}
 }
 
 export default TripController;

@@ -4,9 +4,13 @@ import {
 	checkDriverIdExists,
 	checkLocationIdExists,
 	checkRiderIdExists,
+	checkTripDuplicate,
 	checkTripExists,
 } from '../middlewares/trip.middleware';
-import { validateTripBody } from '../validations/trip.validation';
+import {
+	validateTripBody,
+	validateTripUrlParam,
+} from '../validations/trip.validation';
 
 const router = express.Router();
 
@@ -16,8 +20,14 @@ router.post(
 	checkDriverIdExists,
 	checkRiderIdExists,
 	checkLocationIdExists,
-	checkTripExists,
+	checkTripDuplicate,
 	TripController.createNewTrip
+);
+router.patch(
+	'/:tripId/complete',
+	validateTripUrlParam,
+	checkTripExists,
+	TripController.completeTrip
 );
 
 export default router;

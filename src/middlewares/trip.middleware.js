@@ -50,12 +50,22 @@ export async function checkLocationIdExists(req, res, next) {
 	next();
 }
 
-export async function checkTripExists(req, res, next) {
+export async function checkTripDuplicate(req, res, next) {
 	const tripId = `${req.body.driverId}${req.body.riderId}${req.body.originId}${req.body.destinationId}`;
 	const trip = await TripService.findTrip({ tripId });
 
-  if (trip) {
+	if (trip) {
 		ResponseService.setError(409, 'Trip request already exists');
+		return ResponseService.send(res);
+	}
+	next();
+}
+
+export async function checkTripExists(req, res, next) {
+	const trip = await TripService.findTrip({ id: req.params.tripId });
+
+	if (!trip) {
+		ResponseService.setError(404, 'Trip does not exists');
 		return ResponseService.send(res);
 	}
 	next();
