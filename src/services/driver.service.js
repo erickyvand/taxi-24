@@ -1,6 +1,6 @@
 import models from '../database/models';
 
-const { Driver } = models;
+const { Driver, Location } = models;
 
 /**
  * Class which handle service of driver
@@ -19,6 +19,7 @@ class DriverService {
 	static availableDrivers(attribute, { limit, offset }) {
 		return Driver.findAndCountAll({
 			where: attribute,
+			include: { model: Location },
 			limit,
 			offset,
 		});

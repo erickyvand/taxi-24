@@ -4,14 +4,15 @@ import {
 	checkDriverExists,
 	checkLocationExists,
 } from '../middlewares/driver.middleware';
-import { validateDriverUrlParam } from '../validations/driver.validation';
+import { validateDriverUrlParam, validateLocationUrlParam } from '../validations/driver.validation';
 
 const router = express.Router();
 
 router.get('/', DriverController.getAllDrivers);
 router.get('/available', DriverController.getAvailableDrivers);
 router.get(
-	'/:location/available',
+	'/:locationId/available',
+	validateLocationUrlParam,
 	checkLocationExists,
 	DriverController.getDriversSpecificLocation
 );
