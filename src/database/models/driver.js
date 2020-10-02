@@ -9,15 +9,20 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			Driver.belongsTo(models.Rider, {
+				foreignKey: 'riderId',
+				targetKey: 'id',
+			});
 		}
 	}
 	Driver.init(
 		{
+			riderId: DataTypes.INTEGER,
 			firstName: DataTypes.STRING,
 			lastName: DataTypes.STRING,
-      phoneNumber: DataTypes.STRING,
-      location: DataTypes.STRING,
-      position: DataTypes.INTEGER,
+			phoneNumber: DataTypes.STRING,
+			location: DataTypes.STRING,
+			position: DataTypes.INTEGER,
 			isAvailable: DataTypes.BOOLEAN,
 		},
 		{

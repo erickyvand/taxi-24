@@ -6,6 +6,7 @@ module.exports = {
 			'Drivers',
 			[
 				{
+					riderId: 1,
 					firstName: 'John',
 					lastName: 'Doe',
 					phoneNumber: '0788564756',
@@ -16,6 +17,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
+					riderId: 2,
 					firstName: 'Manzi',
 					lastName: 'Fabrice',
 					phoneNumber: '0788435609',
@@ -26,6 +28,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
+					riderId: 1,
 					firstName: 'Kayiranga',
 					lastName: 'Fred',
 					phoneNumber: '0788095764',
@@ -36,6 +39,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
+					riderId: 1,
 					firstName: 'Ngirinshuti',
 					lastName: 'Hamza',
 					phoneNumber: '0788049581',
@@ -46,6 +50,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
+					riderId: 1,
 					firstName: 'Munana',
 					lastName: 'Jean',
 					phoneNumber: '0788398252',
@@ -56,6 +61,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
+					riderId: 3,
 					firstName: 'Habarurema',
 					lastName: 'Moussa',
 					phoneNumber: '0788486794',
