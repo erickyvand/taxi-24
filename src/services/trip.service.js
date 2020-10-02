@@ -17,6 +17,15 @@ class TripService {
 			returning: true,
 		});
 	}
+
+	static findTrips(attribute, { offset, limit }) {
+		return Trip.findAndCountAll({
+			where: attribute,
+			order: [['id', 'DESC']],
+			offset,
+			limit,
+		});
+	}
 }
 
 export default TripService;

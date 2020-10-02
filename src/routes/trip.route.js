@@ -30,4 +30,6 @@ router.patch(
 	TripController.completeTrip
 );
 
+router.get('/active', TripController.activeTrips);
+
 export default router;

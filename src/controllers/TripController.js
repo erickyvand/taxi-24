@@ -1,3 +1,4 @@
+import { paginationHelper } from '../helpers';
 import ResponseService from '../services/response.service';
 import TripService from '../services/trip.service';
 
@@ -26,6 +27,26 @@ class TripController {
 			'Trip has been completed successfully',
 			completeTrip
 		);
+		return ResponseService.send(res);
+	}
+
+	static async activeTrips(req, res) {
+		const { page = 1, limit = 10 } = req.query;
+		const offset = (page - 1) * limit;
+
+		const trips = await TripService.findTrips(
+			{ status: 'active' },
+			{ offset, limit }
+		);
+		ResponseService.setSuccess(200, 'List of active trips', {
+			pageMeta: paginationHelper({
+				count: trips.count,
+				rows: trips.rows,
+				offset,
+				limit,
+			}),
+			rows: trips.rows,
+		});
 		return ResponseService.send(res);
 	}
 }
