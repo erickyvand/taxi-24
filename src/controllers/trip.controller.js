@@ -1,6 +1,7 @@
 import { paginationHelper } from '../helpers';
 import ResponseService from '../services/response.service';
 import TripService from '../services/trip.service';
+import InvoiceService from '../services/invoice.service';
 
 class TripController {
 	static async createNewTrip(req, res) {
@@ -11,6 +12,7 @@ class TripController {
 			originId: req.body.originId,
 			destinationId: req.body.destinationId,
 			departureDate: req.body.departureDate,
+			amount: req.body.amount,
 			status: 'active',
 		});
 		ResponseService.setSuccess(201, 'Trip request successfully created', trip);
@@ -18,15 +20,23 @@ class TripController {
 	}
 
 	static async completeTrip(req, res) {
+		const { tripId } = req.params;
 		const completeTrip = await TripService.updateTrip(
-			{ id: req.params.tripId },
+			{ id: tripId },
 			{ status: 'complete' }
 		);
-		ResponseService.setSuccess(
-			200,
-			'Trip has been completed successfully',
-			completeTrip
-		);
+
+		const invoice = await InvoiceService.findInvoice({ tripId });
+
+		if (invoice) {
+			ResponseService.setError(409, 'This Invoice has been generated before');
+			return ResponseService.send(res);
+		}
+		await InvoiceService.createInvoice({ tripId });
+
+		ResponseService.setSuccess(200, 'Trip has been completed successfully', {
+			completeTrip,
+		});
 		return ResponseService.send(res);
 	}
 
@@ -38,6 +48,7 @@ class TripController {
 			{ status: 'active' },
 			{ offset, limit }
 		);
+
 		ResponseService.setSuccess(200, 'List of active trips', {
 			pageMeta: paginationHelper({
 				count: trips.count,
@@ -47,6 +58,14 @@ class TripController {
 			}),
 			rows: trips.rows,
 		});
+		return ResponseService.send(res);
+	}
+
+	static async getInvoice(req, res) {
+		const invoice = await InvoiceService.findInvoice({
+			tripId: req.params.tripId,
+		});
+		ResponseService.setSuccess(200, 'Trip invoice', invoice);
 		return ResponseService.send(res);
 	}
 }

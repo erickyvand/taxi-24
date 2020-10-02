@@ -1,5 +1,5 @@
 import express from 'express';
-import TripController from '../controllers/TripController';
+import TripController from '../controllers/trip.controller';
 import {
 	checkDriverIdExists,
 	checkLocationIdExists,
@@ -31,5 +31,11 @@ router.patch(
 );
 
 router.get('/active', TripController.activeTrips);
+router.get(
+	'/:tripId/invoice',
+	validateTripUrlParam,
+	checkTripExists,
+	TripController.getInvoice
+);
 
 export default router;
