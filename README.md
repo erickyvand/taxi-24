@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/erickyvand/taxi-24.svg?branch=develop)](https://travis-ci.org/erickyvand/taxi-24)
+[![Coverage Status](https://coveralls.io/repos/github/erickyvand/taxi-24/badge.svg?branch=develop)](https://coveralls.io/github/erickyvand/taxi-24?branch=develop)
 # TAXI-24 API
 ## How to get started with this API
 This project was developed in NodeJs, in order to test it you have to follow these steps:
